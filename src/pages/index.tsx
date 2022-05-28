@@ -1,10 +1,13 @@
-
-
 import Head from 'next/head'
-import {GetServerSideProps} from 'next'
+import {GetStaticProps} from 'next'
 import { SubscribeButton } from '../components/SubscribeButton'
 import styles from './home.module.scss'
 import { stripe } from '../services/stripe'
+
+//tres formas de fazer um chama API
+//Client-side
+//Server-side
+// Static
 
 interface HomeProps {
   product: {
@@ -20,7 +23,7 @@ export default function Home({product}: HomeProps) {
         <title>Home  - ig.news</title>
       </Head>
 
-
+**
      <main className={styles.contentContainer}>
 
        <section className={styles.hero}>
@@ -38,7 +41,7 @@ export default function Home({product}: HomeProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ()=>{
+export const getStaticProps: GetStaticProps = async ()=>{
 const price = await stripe.prices.retrieve("price_1L4UP1FAwJjQFc2k8xfVW8X8"
 //,{ expand:['product'] } caso queira mostrar dados do produto
 )
@@ -57,7 +60,8 @@ const product = {
   return {
     props: {
       product,
-    }
+    },
+    revalidate: 60 * 60 * 24 //tempo que será reconstruido a pagina em 24 hours
 
   }
 }
