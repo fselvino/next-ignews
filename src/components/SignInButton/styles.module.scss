@@ -27,7 +27,7 @@
 
     transition: filter 0.2s;
 
-    &:hover {
-        filter: brightness(0.8)
+    &hover {
+        filter: brightness(0.8);
     }
 }
