@@ -54,7 +54,6 @@ const product = {
 
   }).format(price.unit_amount /100),
 
-
 }
 
   return {
